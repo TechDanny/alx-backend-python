@@ -6,8 +6,9 @@ Parameterize and patch as decorators
 
 from client import *
 import unittest
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, MagicMock, PropertyMock
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -60,6 +61,12 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(licensed_client, expected)
 
 
+@parameterized_class([
+    {
+    "expected_repos": TEST_PAYLOAD[0][2],
+    "apache2_repos": TEST_PAYLOAD[0][3],
+    },
+])
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """
     Integration test: fixtures
