@@ -58,3 +58,27 @@ class TestGithubOrgClient(unittest.TestCase):
         git_client = GithubOrgClient("google")
         licensed_client = git_client.has_license(repo, key)
         self.assertEqual(licensed_client, expected)
+
+
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """
+    Integration test: fixtures
+    """
+    def test_public_repos(self) -> None:
+        """
+         tests GithubOrgClient.public_repos
+        """
+        self.assertEqual(
+            GithubOrgClient("google").public_repos(),
+            self.expected_repos
+        )
+
+    def test_public_repos_with_license(self) -> None:
+        """
+        tests the public_repos with the argument license="apache-2.0"
+        and make sure the result matches the expected value from the fixtures.
+        """
+        self.assertEqual(
+            GithubOrgClient("google").public_repos(license="apache-2.0"),
+            self.apache2_repos,
+        )
