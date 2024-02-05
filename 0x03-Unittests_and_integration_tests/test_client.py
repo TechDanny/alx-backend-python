@@ -30,5 +30,5 @@ class TestGithubOrgClient(unittest.TestCase):
         git_client = GithubOrgClient(org)
         self.assertEqual(git_client.org(), resp)
         mocked_fxn.assert_called_once_with(
-            "https://api.github.com/orgs/{org}".format(org)
+            "https://api.github.com/orgs/{}".format(org)
         )
